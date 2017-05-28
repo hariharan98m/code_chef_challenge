@@ -1,0 +1,41 @@
+#include<iostream>
+using namespace std;
+
+int main(){
+	char a[2][600];
+	int n,j=0;
+	cin>>n;
+	for(int i=0;i<2;i++){
+		cin>>a[i];	
+	}
+	int i;
+	for(i=0;i<n;i++){
+		if(a[0][i]=='#'){
+			j=0;break;
+		}
+		if(a[1][i]=='#'){
+			j=1;break;
+		}
+	}	
+	int cond_check=1;
+	while(i<n){
+				
+		if(j==0){
+			if(a[j][i+1]=='#'){
+			if(a[j+1][i]=='#') {cout<<"no j=0 now. (j=1,"<<i<<") and (0,"<<i+1<<") both have #\n";cond_check=0;break;}
+			else i++;
+			}
+			if(a[j+1][i]=='#') j=1;
+			else {cout<<"no\n j=0 and neither i+1 or j-1 have #"; cond_check=0;break;}
+		}
+		if(j==1){
+			if(a[j][i+1]=='#'){
+			if(a[j-1][i]=='#') {cout<<"no j=0,"<<i<<" and (1,"<<i+1<<") have #\n"; cond_check=0; break;}
+			else i++;
+			}
+			if(a[j-1][i]=='#') j=0;
+			else {cout<<"i="<<i<<'\n'<<"j="<<j<<"\nno neither i+1 or j+1 have #\n"; cond_check=0; break;}
+		}
+	}
+	if(cond_check==1) cout<<"yes\n";
+}		
