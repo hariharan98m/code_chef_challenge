@@ -16,26 +16,44 @@ int main(){
 		if(a[1][i]=='#'){
 			j=1;break;
 		}
-	}	
+	}
+	cout<<"i="<<i<<'\n';	
+	cout<<"j="<<j<<'\n';
 	int cond_check=1;
-	while(i<n){
-				
+	while(i<n-1){
+	cout<<"i="<<i<<'\n';	
+	cout<<"j="<<j<<'\n';	
 		if(j==0){
+			if((a[j+1][i]=='.'&&a[j][i+1]=='.')||(a[j+1][i]=='#'&&a[j][i+1]=='.')) break;
+			cout<<"j is 0\n";
 			if(a[j][i+1]=='#'){
-			if(a[j+1][i]=='#') {cout<<"no j=0 now. (j=1,"<<i<<") and (0,"<<i+1<<") both have #\n";cond_check=0;break;}
-			else i++;
+				cout<<"next i cell has #\n";
+				if((a[j+1][i]=='#')&&(a[j][i-1]=='#')) {cout<<"down cell has # \nno\n";cond_check=0;break;}
+				else i++;
 			}
-			if(a[j+1][i]=='#') j=1;
-			else {cout<<"no\n j=0 and neither i+1 or j-1 have #"; cond_check=0;break;}
+			else if(a[j+1][i]=='#') {j=1;cout<<"down cell has #\n";}
+			else {cout<<"no last case\n"; cond_check=0;break;}
 		}
-		if(j==1){
+		else if(j==1){
+			cout<<"j is 1\n";
+			if((a[j-1][i]=='.'&&a[j][i+1]=='.')||(a[j-1][i]=='#'&&a[j][i+1]=='.')) break;
 			if(a[j][i+1]=='#'){
-			if(a[j-1][i]=='#') {cout<<"no j=0,"<<i<<" and (1,"<<i+1<<") have #\n"; cond_check=0; break;}
-			else i++;
+				cout<<"Next cell has # \n";
+				if((a[j-1][i]=='#')&&(a[j][i-1]=='#')) {cout<<"Up cell has # and previous cell has a # \nno \n"; cond_check=0; break;}
+				else i++;
 			}
-			if(a[j-1][i]=='#') j=0;
-			else {cout<<"i="<<i<<'\n'<<"j="<<j<<"\nno neither i+1 or j+1 have #\n"; cond_check=0; break;}
+			else if(a[j-1][i]=='#') {j=0;cout<<"Up cell has # \n";}
+			else {cout<<"no\n"; cond_check=0; break;}
 		}
 	}
-	if(cond_check==1) cout<<"yes\n";
+	int f=0;
+	if(cond_check==1) {
+	for (int m=i;m<n;m++){
+		if(a[0][i]=='#'||a[1][j]=='#')
+			{cout<<"no\n"; f=1;break;	}
+		
+	}
+	}
+	if(!f)
+	cout<<"yes\n";
 }		
